@@ -33,6 +33,15 @@ function App() {
   const randomY = gsap.utils.random(-200,200,100);
   // const boxRef = useRef();
   const iconRef = useRef();
+  // const {contextSafe} = useGSAP(); // for memory management 
+
+  // this is used for memory management... 
+  // const rotateBox = contextSafe(()=>{
+  //   gsap.to(boxRef,{
+  //     rotate:360,
+  //     duration:1
+  //   })
+  // })
   const handleAnimate = () => {
     setXValue(randomX);
     console.log(xvalue);
