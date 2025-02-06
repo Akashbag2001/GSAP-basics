@@ -1,6 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import React, { useRef, useState } from "react";
+import { GiScarabBeetle } from "react-icons/gi";
 
 function App() {
   // const boxref = useRef();
@@ -23,19 +24,43 @@ function App() {
   //   })
   // },{scope:containerRef})
 
-  const [animatecircle, setAnimatecircle] = useState(0);
-  const randomNumber = gsap.utils.random(-500, 500, 100);
-  const handleClick = () => {
-    setAnimatecircle(randomNumber);
-    console.log(animatecircle);
+  // const [animatecircle, setAnimatecircle] = useState(0);
+  const [xvalue, setXValue] = useState(0);
+  const [roti, setRoti] = useState(0);
+  const [yvalue, setYvalue] = useState(0)
+  const randomX = gsap.utils.random(-200, 200, 100);
+  const randomRoti = gsap.utils.random(-360, 360, 30);
+  const randomY = gsap.utils.random(-200,200,100);
+  // const boxRef = useRef();
+  const iconRef = useRef();
+  const handleAnimate = () => {
+    setXValue(randomX);
+    console.log(xvalue);
+    setRoti(randomRoti);
+    console.log(roti);
+    setYvalue(randomY)
+    console.log(yvalue)
   };
   useGSAP(() => {
-    gsap.to(".circle", {
-      x: animatecircle,
-      duration: 0.5,
-      
-    });
-  }, [animatecircle]);
+    gsap.to(iconRef.current,{
+      x:xvalue,
+      y:yvalue,
+      rotate:roti,
+      duration:1
+    })
+  },[roti,xvalue,yvalue]);
+
+  // const handleClick = () => {
+  //   setAnimatecircle(randomNumber);
+  //   console.log(animatecircle);
+  // };
+  // useGSAP(() => {
+  //   gsap.to(".circle", {
+  //     x: animatecircle,
+  //     duration: 0.5,
+
+  //   });
+  // }, [animatecircle]);
   return (
     <main>
       {/* <div ref={containerRef} className="container">
@@ -47,8 +72,11 @@ function App() {
         <div className="box"></div>
         <div className="circle"></div>
       </div> */}
-      <button onClick={handleClick}>Animate</button>
-      <div className="circle"></div>
+      {/* <button onClick={handleAnimate}>Animate</button> */}
+      {/* <div className="circle"></div> */}
+      {/* <div className="box" ref={boxRef} onClick={handleAnimate}></div> */}
+      <h1>Click on the bee </h1>
+      <GiScarabBeetle ref={iconRef} onClick={handleAnimate} size={200}/>
     </main>
   );
 }
